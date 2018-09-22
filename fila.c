@@ -20,34 +20,51 @@ Fila* fila_criar() {
 
 void fila_adicionar(Fila *f, Token t) {
 	No *n = (No*) malloc(sizeof(No));
-	n->info = info;
+	n->token = t;
 	n->prox = NULL;
 	
-	if(f->fim == NULL) {
+	if(f->ultimo == NULL) {
 		f->primeiro = n;
 		f->ultimo = n;
 		return;
 }
 
-	f->fim->prox = n;
-	f->fim = n;
+	f->ultimo->prox = n;
+	f->ultimo = n;
 
 }
 
 Token fila_remover(Fila *f) {
-	if(f->inicio == f->fim) {
+	Token t;
+	if(f->primeiro == f->ultimo) {
 	printf("Fila vazia!\n");
-	return 0
+	return t;}
+	
+	No *excluir = f->primeiro;
+	f->primeiro = f->primeiro->prox;
+	if(f->primeiro == NULL) {
+	f->ultimo = NULL;
+}
+	t = excluir->token;
+	free(excluir);
+	return t;
+
 }
 
 int fila_vazia(Fila *f) {
-	if(f->inicio == NULL) {
+	if(f->primeiro == NULL) {
 		printf("Fila vazia!\n");
 		return 0;
 }
+}
 
 void fila_destruir(Fila *f) {
-	free(f->dados);
+	No *tmp = f->primeiro;
+	while(tmp != NULL) {
+	No *excluir = tmp;
+	tmp = tmp->prox;
+	free(excluir);
+}
 	free(f);
 
 }
@@ -58,3 +75,4 @@ void fila_imprimir(Fila *f) {
 	while(tmp != NULL) {
 	token_imprimir(tmp->token);
 	tmp = tmp->prox;}
+}
