@@ -12,29 +12,46 @@ struct pilha {
 };
 
 Pilha* pilha_criar() {
-	//Implemente
+	Pilha *p = (Pilha*) malloc(sizeof(Pilha));
+	p->topo = 0;
+	p->dados = (double*) malloc(tamanho*sizeof(double));
+	p->tamanho = tamanho;
+	return p;
+
 }
 
 void pilha_push(Pilha *p, Token t) {
-	//Implemente
+	if(p->topo >= p->tamanho) {
+	printf("Pilha cheia!\n");
+	return;
 }
 
 Token pilha_pop(Pilha *p) {
-	//Implemente
+	if(p->topo == 0) {
+	printf("Pilha vazia!\n");
+	return 0;
 }
 
 Token pilha_primeiro(Pilha *p) {
-	//Implemente
+	return p->primeiro->token;  
 }
 
 int pilha_vazia(Pilha *p) {
-	//Implemente
+	if(p->inicio == NULL) {
+	printf("pilha vazia!\n");
+	return 0;}
+
 }
 
 void pilha_destruir(Pilha *p) {
-	//Implemente
+	free(p->dados);
+	free(p);
 }
 
 void pilha_imprimir(Pilha *p) {
-	//Implemente
+	No *tmp = p->primeiro;
+
+	while(tmp != NULL) {
+	token_imprimir(tmp->token);
+	tmp = tmp->prox;}
 }
