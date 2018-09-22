@@ -12,25 +12,49 @@ struct fila {
 };
 
 Fila* fila_criar() {
-	//Implemente
+	Fila*f= (Fila*)malloc(sizeof(Fila));
+	f->primeiro = NULL;
+	f->ultimo= NULL;
+	return f;
 }
 
 void fila_adicionar(Fila *f, Token t) {
-	//Implemente
+	No *n = (No*) malloc(sizeof(No));
+	n->info = info;
+	n->prox = NULL;
+	
+	if(f->fim == NULL) {
+		f->primeiro = n;
+		f->ultimo = n;
+		return;
+}
+
+	f->fim->prox = n;
+	f->fim = n;
+
 }
 
 Token fila_remover(Fila *f) {
-	//Implemente
+	if(f->inicio == f->fim) {
+	printf("Fila vazia!\n");
+	return 0
 }
 
 int fila_vazia(Fila *f) {
-	//Implemente
+	if(f->inicio == NULL) {
+		printf("Fila vazia!\n");
+		return 0;
 }
 
 void fila_destruir(Fila *f) {
-	//Implemente
+	free(f->dados);
+	free(f);
+
 }
 
 void fila_imprimir(Fila *f) {
-	//Implemente
-}
+	No *tmp = f->primeiro;
+
+	while(tmp != NULL) {
+	token_imprimir(tmp->token);
+	tmp = tmp->prox;}
