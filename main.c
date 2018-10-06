@@ -5,14 +5,28 @@
 #include "tokenizacao.h"
 
 int main() {
-	//Substitua esta função pela implementação do seu trabalho.
-	printf("Digite uma expressão:\n");
+	
+	printf("Digite uma expressÃ£o:\n");
 	Token t = token_proximo();
+	Pilha *p = pilha_criar();
+	Fila *f = fila_criar();
 	
 	while(t.tipo != FIM && t.tipo != ERRO) {
-		printf("\nToken = ");
-		token_imprimir(t);
+		pilha_push(p, t);
+		fila_adicionar(f, t);
 		t = token_proximo();
+	}
+	
+	printf("Testando a pilha:\n");
+	while(pilha_vazia(p) != 0) {
+		Token tok = pilha_pop(p);
+		token_imprimir(tok);
+	}
+	
+	printf("Testando a fil:\n");
+	while(fila_vazia(f) != 0) {
+		Token tok = fila_remover(f);
+		token_imprimir(tok);
 	}
 	
 	return 0;
